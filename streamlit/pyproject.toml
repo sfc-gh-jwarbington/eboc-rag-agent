@@ -1,7 +1,7 @@
 [project]
 name = "eboc_assistant"
 version = "0.1.0"
-description = "EBOC Clinical Guidelines Assistant (Streamlit in Snowflake, container runtime)"
+description = "EBOC Clinical Decision Support (Streamlit in Snowflake, container runtime)"
 requires-python = ">=3.11, <3.12"
 dependencies = [
     "streamlit",
