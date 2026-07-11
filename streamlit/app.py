@@ -225,8 +225,11 @@ def log_feedback(session, question, feedback, feedback_text=""):
     session.sql(
         f"UPDATE {AGENT_DB}.{AGENT_SCHEMA}.QUERY_LOG "
         f"SET FEEDBACK = ?, FEEDBACK_TEXT = ? "
-        f"WHERE SESSION_ID = ? AND QUESTION = ? AND LOG_TYPE = 'query' "
-        f"ORDER BY CREATED_AT DESC LIMIT 1",
+        f"WHERE ID = ("
+        f"  SELECT ID FROM {AGENT_DB}.{AGENT_SCHEMA}.QUERY_LOG "
+        f"  WHERE SESSION_ID = ? AND QUESTION = ? AND LOG_TYPE = 'query' "
+        f"  ORDER BY CREATED_AT DESC LIMIT 1"
+        f")",
         params=[feedback, feedback_text, st.session_state.session_id, question]
     ).collect()
 
